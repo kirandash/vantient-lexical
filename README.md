@@ -1,3 +1,5 @@
+# Vantient Lexical Editor with “Vantient Quest Embed” support
+
 ## How to run this project locally?
 
 1. Clone this repository
