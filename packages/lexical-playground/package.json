@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@rollup/plugin-babel": "^5.3.0",
+    "@babel/plugin-transform-flow-strip-types": "^7.14.5",
     "@excalidraw/excalidraw": "^0.14.2",
     "@lexical/clipboard": "0.11.2",
     "@lexical/code": "0.11.2",
