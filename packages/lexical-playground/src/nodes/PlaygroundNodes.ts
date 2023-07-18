@@ -34,6 +34,7 @@ import {PollNode} from './PollNode';
 import {StickyNode} from './StickyNode';
 import {TableNode as NewTableNode} from './TableNode';
 import {TweetNode} from './TweetNode';
+import {VantientQuestNode} from './VantientQuestNode';
 import {YouTubeNode} from './YouTubeNode';
 
 const PlaygroundNodes: Array<Klass<LexicalNode>> = [
@@ -65,6 +66,7 @@ const PlaygroundNodes: Array<Klass<LexicalNode>> = [
   TweetNode,
   YouTubeNode,
   FigmaNode,
+  VantientQuestNode,
   MarkNode,
   CollapsibleContainerNode,
   CollapsibleContentNode,

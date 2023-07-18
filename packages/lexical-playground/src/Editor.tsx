@@ -67,6 +67,7 @@ import {TablePlugin as NewTablePlugin} from './plugins/TablePlugin';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
 import TreeViewPlugin from './plugins/TreeViewPlugin';
 import TwitterPlugin from './plugins/TwitterPlugin';
+import VantientQuestPlugin from './plugins/VantientQuestPlugin';
 import YouTubePlugin from './plugins/YouTubePlugin';
 import PlaygroundEditorTheme from './themes/PlaygroundEditorTheme';
 import ContentEditable from './ui/ContentEditable';
@@ -215,6 +216,7 @@ export default function Editor(): JSX.Element {
             <PollPlugin />
             <TwitterPlugin />
             <YouTubePlugin />
+            <VantientQuestPlugin />
             <FigmaPlugin />
             {!isEditable && <LexicalClickableLinkPlugin />}
             <HorizontalRulePlugin />

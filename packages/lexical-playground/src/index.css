@@ -476,6 +476,10 @@ i.youtube {
   background-image: url(images/icons/youtube.svg);
 }
 
+i.vantient {
+  background-image: url(images/icons/vantient.png);
+}
+
 .icon.left-align,
 i.left-align {
   background-image: url(images/icons/text-left.svg);
