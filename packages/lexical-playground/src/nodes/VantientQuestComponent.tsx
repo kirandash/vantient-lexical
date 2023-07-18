@@ -42,7 +42,6 @@ export default function VantientQuestComponent({
     //   }),
     //   headers: {
     //     'Content-Type': 'application/json',
-    //     // 'Content-Type': 'application/x-www-form-urlencoded',
     //   },
     //   method: 'POST',
     // })

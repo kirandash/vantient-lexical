@@ -29,3 +29,70 @@
 - `npm run test-e2e-webkit` runs only webkit e2e tests.
 - `npm run debug-test-e2e-webkit` runs only webkit e2e tests in head mode for debugging.
 
+## How I added "Vantient Quest Embed" support?
+### Step 1: Created `VantientQuestPlugin`
+`VantientQuestPlugin` is a Lexical React Plugin that adds a new node type to the editor. 
+
+Since the Plugin introduces new node, it has to be registered in `PlaygroundNodes.ts`
+
+LexicalComposer provides access to the underlying LexicalEditor instance via React Context:
+
+```
+// VantientQuestPlugin/index.ts
+
+export default function VantientQuestPlugin(): JSX.Element | null {
+  const [editor] = useLexicalComposerContext();
+  ...
+```
+
+With access to the Editor, the plugin can extend Lexical via Commands, Transforms, or other APIs. `VantientQuestPlugin` embeds a `quest` into the editor, by fetching the data asynchronously from `https://cmty.space/quest` based on the provided `questID`:
+
+Resources: [Lexical's React plugin](https://lexical.dev/docs/react/create_plugin)
+
+`VantientQuestPlugin` is just a React component that accesses the Lexical editor via React Context (`useLexicalComposerContext`). Using the LexicalEditor instance, this plugin does two things:
+
+- Verifies that there is a `VantientQuestNode` registered on the editor (if you forget to register the node, you can't do #2)
+- registers a "command", passing a callback that will run when that command is dispatched. The command callback creates and inserts a `VantientQuestNode` in the editor.
+
+### Step 2: Created `VantientQuestNode`
+> Nodes are a core concept in Lexical. Not only do they form the visual editor view, as part of the EditorState, but they also represent the underlying data model for what is stored in the editor at any given time. Lexical has a single core based node, called LexicalNode that is extended internally to create Lexical's five base nodes: RootNode, LineBreakNode, ElementNode, TextNode and DecoratorNode.
+
+For `VantientQuestNode` I have extended `DecoratorNode` since Decorator node rendering can output components from React, vanilla js or other frameworks.
+
+Overview:
+
+```
+export class VantientQuestNode extends DecoratorBlockNode {
+  ...
+  decorate(_editor: LexicalEditor, config: EditorConfig): JSX.Element {
+    ...
+    return (
+      <React.Suspense>
+        <VantientQuestComponent
+          className={className}
+          format={this.__format}
+          nodeKey={this.getKey()}
+          questID={this.__id}
+        />
+      </React.Suspense>
+    );
+  }
+}
+```
+
+- Registered `VantientQuestNode` in `PlaygroundNodes.ts`
+
+### Step 3: Created VantientQuestComponent
+This is a React component that renders the Vantient Quest Embed based on the API response from: `https://cmty.space/api/query/quest` using `questId`
+- Note: I have not used `iframe` for rendering the embed since it is on the same domain as the editor. But if we need to embed it as an `iframe`, we can achieve that too.
+
+- Under the `ui` folder, I have added the related styles in `VantientQuestComponent.css` file and also created `VantientButton.tsx`, `VantientButton.css` for rendering the button.
+
+### Step 4: Created VantientQuestEmbedConfig
+Added `VantientQuestEmbedConfig` in `AutoEmbedPlugin/index.tsx` file which has all the meta data to be used for `ComponentPickerOption`.
+
+This is used to render the "Vantient Quest" option in the toolbar and then the modal.
+
+Once user enters the URL, the `parseUrl` method is used to check if it is a valid URL: `/^.*(cmty\.space\/quest\/)([a-zA-Z0-9]+).*/.exec(url)` and if it is valid, the embed button is enabled and the user can click on it to embed the quest.
+
+On clicking embed, the `VantientQuestPlugin` will trigger the command `INSERT_VANTIENT_QUEST_COMMAND` to insert the `VantientQuestNode` in the editor.
