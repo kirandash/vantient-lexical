@@ -1,11 +1,3 @@
-<h1 align="center">
-  <a href="https://lexical.dev">Vantient Lexical</a>
-</h1>
-
-- [Lexical Playground](https://playground.lexical.dev)
-
----
-
 ## How to run this project locally?
 
 1. Clone this repository
@@ -26,3 +18,4 @@
 - `npm run debug-test-e2e-firefox` runs only firefox e2e tests in head mode for debugging.
 - `npm run test-e2e-webkit` runs only webkit e2e tests.
 - `npm run debug-test-e2e-webkit` runs only webkit e2e tests in head mode for debugging.
+
