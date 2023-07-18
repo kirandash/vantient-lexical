@@ -2,6 +2,10 @@
 
 ## Demo
 
+[Lexical Playground with Quest Embed](https://vantient-lexical-playground.vercel.app/)
+
+### Screen capture
+
 ![](./assets/screen-capture.gif)
 
 ## How to run this project locally?
