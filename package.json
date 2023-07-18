@@ -99,15 +99,7 @@
     "release": "npm run prepare-release && node ./scripts/npm/release.js",
     "size": "npm run build && size-limit"
   },
-  "overrides": {
-    "@playwright/test": {
-      "playwright": "1.29.0-next-alpha-trueadm-fork",
-      "playwright-core": "1.29.0-next-alpha-trueadm-fork"
-    }
-  },
-  "dependencies": {
-    "@types/katex": "^0.14.0",
-    "yjs": "^13.5.42",
+  "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "^0.27.0",
     "@babel/preset-flow": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
@@ -172,6 +164,16 @@
     "typedoc": "^0.24.8",
     "typescript": "5.1.6",
     "uuid": "^8.3.2"
+  },
+  "overrides": {
+    "@playwright/test": {
+      "playwright": "1.29.0-next-alpha-trueadm-fork",
+      "playwright-core": "1.29.0-next-alpha-trueadm-fork"
+    }
+  },
+  "dependencies": {
+    "@types/katex": "^0.14.0",
+    "yjs": "^13.5.42"
   },
   "size-limit": [
     {
