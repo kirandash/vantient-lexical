@@ -12,6 +12,7 @@ import '../ui/VantientQuestComponent.css';
 import {format as formatDate} from 'date-fns';
 import * as React from 'react';
 
+import {BlockWithAlignableContents} from '../../../lexical-react/src/LexicalBlockWithAlignableContents';
 import calendar from '../images/icons/calendar.svg';
 import gift from '../images/icons/gift.svg';
 import VantientButton from '../ui/VantientButton';
@@ -772,54 +773,59 @@ export default function VantientQuestComponent({
   if (!questData) return null;
 
   return (
-    <div className="VantientQuestContainer">
-      <div className="VantientQuestContent">
-        <div className="VantientQuestImageContainer">
-          <img
-            alt=""
-            decoding="async"
-            data-nimg="fill"
-            className="object-cover"
-            sizes="100vw"
-            src={questData.coverImageUrl}
-          />
+    <BlockWithAlignableContents
+      className={className}
+      format={format}
+      nodeKey={nodeKey}>
+      <div className="VantientQuestContainer">
+        <div className="VantientQuestContent">
+          <div className="VantientQuestImageContainer">
+            <img
+              alt=""
+              decoding="async"
+              data-nimg="fill"
+              className="object-cover"
+              sizes="100vw"
+              src={questData.coverImageUrl}
+            />
+          </div>
+          <div className="VantientQuestTextContainer">
+            <p className="VantientQuestTitle">{questData.title}</p>
+            <p className="VantientQuestDescription">{questData.description}</p>
+          </div>
+          <div className="VantientQuestGiftWrapper">
+            <img
+              alt="gift"
+              loading="lazy"
+              width="20"
+              height="20"
+              decoding="async"
+              data-nimg="1"
+              src={gift}
+            />
+          </div>
         </div>
-        <div className="VantientQuestTextContainer">
-          <p className="VantientQuestTitle">{questData.title}</p>
-          <p className="VantientQuestDescription">{questData.description}</p>
+        <div className="VantientQuestButtonContainer">
+          <VantientButton>Join quest</VantientButton>
         </div>
-        <div className="VantientQuestGiftWrapper">
-          <img
-            alt="gift"
-            loading="lazy"
-            width="20"
-            height="20"
-            decoding="async"
-            data-nimg="1"
-            src={gift}
-          />
+        <div className="VantientQuestFooterWrapper">
+          <div className="VantientQuestFooter">
+            <img
+              alt="calendar"
+              loading="lazy"
+              width="20"
+              height="20"
+              decoding="async"
+              data-nimg="1"
+              src={calendar}
+            />
+            <p>
+              {formatDate(questData.created, 'd MMM')} to{' '}
+              {formatDate(questData.endsAt, 'd MMM')}
+            </p>
+          </div>
         </div>
       </div>
-      <div className="VantientQuestButtonContainer">
-        <VantientButton>Join quest</VantientButton>
-      </div>
-      <div className="VantientQuestFooterWrapper">
-        <div className="VantientQuestFooter">
-          <img
-            alt="calendar"
-            loading="lazy"
-            width="20"
-            height="20"
-            decoding="async"
-            data-nimg="1"
-            src={calendar}
-          />
-          <p>
-            {formatDate(questData.created, 'd MMM')} to{' '}
-            {formatDate(questData.endsAt, 'd MMM')}
-          </p>
-        </div>
-      </div>
-    </div>
+    </BlockWithAlignableContents>
   );
 }
