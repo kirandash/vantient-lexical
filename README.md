@@ -1,4 +1,4 @@
-# Vantient Lexical Editor with “Vantient Quest Embed” support
+# Lexical Editor with “Vantient Quest Embed” support
 
 ## How to run this project locally?
 
