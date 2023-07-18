@@ -1,5 +1,9 @@
 # Lexical Editor with “Vantient Quest Embed” support
 
+## Demo
+
+![](./assets/screen-capture.gif)
+
 ## How to run this project locally?
 
 1. Clone this repository
