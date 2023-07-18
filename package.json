@@ -89,7 +89,7 @@
     "prepare-ci": "npm run build-dev --prefix packages/lexical-playground",
     "prepare-ci-prod": "npm run build-playground-prod",
     "prepare-release": "npm run build-release && node ./scripts/npm/prepare-release.js",
-    "prepare": "husky install",
+    "prepare": "npx husky install",
     "prepare-www": "node scripts/www/rewriteImports.js",
     "changelog": "func() { git --no-pager log --oneline ${1}...HEAD --pretty=format:\"- %s %an\"; }; func",
     "increment-version": "node ./scripts/npm/increment-version",
