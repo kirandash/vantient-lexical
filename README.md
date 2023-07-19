@@ -110,6 +110,8 @@ On clicking embed, the `VantientQuestPlugin` will trigger the command `INSERT_VA
 
 ## Areas for Improvements:
 
-Right now I am using `LexicalBlockWithAlignableContents` so that `VantientQuestNode` can be deleted. But a better approach would be to create another component which handles `VantientQuestNode` deletion and other future features explicitly.
+- Right now I am using `LexicalBlockWithAlignableContents` so that `VantientQuestNode` can be deleted. But a better approach would be to create another component which handles `VantientQuestNode` deletion and other future features explicitly.
 
-Currently I have used mock data for the quest data because the API is throwing CORS error. But once the API is fixed, we can use the actual data.
+- Currently I have used mock data for the quest data because the API is throwing CORS error. But once the API is fixed, we can use the actual data.
+
+- Currently the Export DOM feature is only exporting a plain div with the quest ID. We can improve this by exporting the actual quest embed.
