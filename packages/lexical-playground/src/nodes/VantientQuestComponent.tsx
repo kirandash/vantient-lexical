@@ -91,7 +91,6 @@ export default function VantientQuestComponent({
               width="20"
               height="20"
               decoding="async"
-              data-nimg="1"
               src={gift}
             />
           </div>
@@ -107,7 +106,6 @@ export default function VantientQuestComponent({
               width="20"
               height="20"
               decoding="async"
-              data-nimg="1"
               src={calendar}
             />
             <p>
