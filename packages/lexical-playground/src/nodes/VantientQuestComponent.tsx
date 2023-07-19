@@ -13,7 +13,6 @@ import {format as formatDate} from 'date-fns';
 import * as React from 'react';
 
 import {BlockWithAlignableContents} from '../../../lexical-react/src/LexicalBlockWithAlignableContents';
-import questJson from '../fixtures/quest.json';
 import calendar from '../images/icons/calendar.svg';
 import gift from '../images/icons/gift.svg';
 import VantientButton from '../ui/VantientButton';
@@ -44,31 +43,40 @@ export default function VantientQuestComponent({
 }: VantientComponentProps) {
   const [questData, setQuestData] = React.useState<Quest | null>(null);
   React.useEffect(() => {
-    // TODO: Enable Fetch call after CORS error is fixed
-    // fetch('https://cmty.space/api/query/quest', {
-    //   body: JSON.stringify({
-    //     _k: `Quest/uqbgr3SvCTrRXuhVoUYFNmps1fJ2KOYb`,
-    //   }),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   method: 'POST',
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //   });
-    const {quest} = questJson;
-    setQuestData({
-      coverImageUrl: quest.coverImageUrl,
-      created: quest._c.time,
-      description: quest.description.text,
-      endsAt: quest.endsAt,
-      title: quest.title,
-    });
+    fetch('http://localhost:3000/query/quest', {
+      body: JSON.stringify({
+        _k: `Quest/${questID}`,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+    })
+      .then((response) => response.json())
+      .then(({data}) => {
+        const {quest} = data;
+        if (!quest) return;
+        setQuestData({
+          coverImageUrl: quest.coverImageUrl,
+          created: quest._c?.time,
+          description: quest.description?.text,
+          endsAt: quest.endsAt,
+          title: quest.title,
+        });
+      });
   }, []);
 
   if (!questData) return null;
+
+  const {title, description, coverImageUrl, created, endsAt} = questData;
+
+  const renderDate = (start: number, end: number) => {
+    if (start && end) {
+      return `${formatDate(start, 'd MMM')} to ${formatDate(end, 'd MMM')}`;
+    } else if (start && !end) {
+      return `${formatDate(start, 'd MMM')} onwards`;
+    }
+  };
 
   return (
     <BlockWithAlignableContents
@@ -84,12 +92,14 @@ export default function VantientQuestComponent({
               data-nimg="fill"
               className="object-cover"
               sizes="100vw"
-              src={questData.coverImageUrl}
+              src={coverImageUrl}
             />
           </div>
           <div className="VantientQuestTextContainer">
-            <p className="VantientQuestTitle">{questData.title}</p>
-            <p className="VantientQuestDescription">{questData.description}</p>
+            {title && <p className="VantientQuestTitle">{title}</p>}
+            {description && (
+              <p className="VantientQuestDescription">{description}</p>
+            )}
           </div>
           <div className="VantientQuestGiftWrapper">
             <img
@@ -115,10 +125,7 @@ export default function VantientQuestComponent({
               decoding="async"
               src={calendar}
             />
-            <p>
-              {formatDate(questData.created, 'd MMM')} to{' '}
-              {formatDate(questData.endsAt, 'd MMM')}
-            </p>
+            <p>{renderDate(created, endsAt)}</p>
           </div>
         </div>
       </div>
