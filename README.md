@@ -117,3 +117,5 @@ On clicking embed, the `VantientQuestPlugin` will trigger the command `INSERT_VA
 - Add e2e test to check if the quest embed is rendered correctly.
 
 - Better icon for "Vantient Quest" option under "Insert" in the toolbar.
+
+- Focus input field on launching modal for Vantient Quest Embed.

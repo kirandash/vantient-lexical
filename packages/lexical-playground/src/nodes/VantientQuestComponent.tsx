@@ -43,7 +43,7 @@ export default function VantientQuestComponent({
 }: VantientComponentProps) {
   const [questData, setQuestData] = React.useState<Quest | null>(null);
   React.useEffect(() => {
-    fetch('http://localhost:3000/query/quest', {
+    fetch('https://vantient-lexical-server.vercel.app/query/quest', {
       body: JSON.stringify({
         _k: `Quest/${questID}`,
       }),
