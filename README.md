@@ -115,3 +115,5 @@ On clicking embed, the `VantientQuestPlugin` will trigger the command `INSERT_VA
 - Currently I have used mock data for the quest data because the API is throwing CORS error. But once the API is fixed, we can use the actual data.
 
 - Currently the Export DOM feature is only exporting a plain div with the quest ID. We can improve this by exporting the actual quest embed.
+
+- Add e2e test to check if the quest embed is rendered correctly.
