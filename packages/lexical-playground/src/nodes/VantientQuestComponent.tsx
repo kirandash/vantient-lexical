@@ -28,14 +28,21 @@ type VantientComponentProps = Readonly<{
   questID: string;
 }>;
 
+type Quest = {
+  coverImageUrl: string;
+  created: number;
+  description: string;
+  endsAt: number;
+  title: string;
+};
+
 export default function VantientQuestComponent({
   className,
   format,
   nodeKey,
   questID,
 }: VantientComponentProps) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [questData, setQuestData] = React.useState<any>(null);
+  const [questData, setQuestData] = React.useState<Quest | null>(null);
   React.useEffect(() => {
     // TODO: Enable Fetch call after CORS error is fixed
     // fetch('https://cmty.space/api/query/quest', {
