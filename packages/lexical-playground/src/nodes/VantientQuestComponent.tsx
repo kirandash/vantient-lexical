@@ -64,7 +64,7 @@ export default function VantientQuestComponent({
           title: quest.title,
         });
       });
-  }, []);
+  }, [questID]);
 
   if (!questData) return null;
 
